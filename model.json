@@ -1,0 +1,264 @@
+{
+  "Components": [
+    {
+      "Active": true,
+      "Type": "Stator",
+      "Parameters": {
+        "Core_Length": 1.1,
+        "Stator_Outer_Diameter": 1.39,
+        "Stator_Inner_Diameter": 0.9,
+        "Slots": 72,
+        "Slot_Depth": 0.097,
+        "Slot_Width": 0.020,
+        "Stator_Lam_Thickness_Total": 0.5,
+        "Stator_Lam_Thickness_Steel": 0.495,
+        "Stator_Packing_Factor": 0.97
+      }
+    },
+    {
+      "Active": true,
+      "Type": "Housing",
+      "Parameters": {
+        "Housing_Diameter": 1.225,
+        "Housing_Thickness": 1.38,
+        "Housing_Length": 0.925,
+        "Landing_Bars": 72,
+        "Landing_Bar_Width": 0.0968
+      }
+    },
+    {
+      "Active": true,
+      "Type": "Rotor",
+      "Parameters": {
+        "Airgap": 1.225,
+        "Shaft_Diameter": 1.38,
+        "Pole_Tip_Height": 0.925,
+        "Pole_Body_Width": 0.1,
+        "Pole_Shoe_Width": 0.0206,
+        "Poles": 6,
+        "Pole_Mid_Angle": 0.1
+      }
+    },
+    {
+      "Active": true,
+      "Type": "Winding",
+      "Parameters": {
+        "Stator_Conductor_Width": 0.007,
+        "Stator_Conductor_Depth": 0.008,
+        "Stator_Layers": 2,
+        "Conductors_Per_Turn": 11,
+        "Stator_NDE_Axial_Overhang": 1.38,
+        "StatorDEAxialOverhang": 0.925,
+        "Conductors_Across_Width": 2,
+        "Conductor_Insulation": 0.1
+      }
+    },
+    {
+      "Active": true,
+      "Type": "Magnet",
+      "Parameters": {
+        "Rotor_Conductor_Columns": 14,
+        "Rotor_Conductors_In_Parallel": 1,
+        "Rotor_Conductor_Depth": 0.005,
+        "Rotor_Conductor_Width": 0.005,
+        "Conductor_Insulation_Rotor": 0.25,
+        "Rotor_NDE_Axial_Overhang": 0.09,
+        "Rotor_DEAxial_Overhang": 0.09
+      }
+    },
+    {
+      "Active": true,
+      "Type": "Operation",
+      "Parameters": {
+        "Speed": 1500
+      }
+    }
+  ],
+  "Losses": [
+    {
+      "Name": "PoleTip-Leading",
+      "Region": "Core",
+      "Loss": 7000
+    },
+    {
+      "Name": "ShoeMid-Leading",
+      "Region": "Core",
+      "Loss": 4000
+    },
+    {
+      "Name": "RotorWinding-Leading",
+      "Region": "Core",
+      "Loss": 5500
+    },
+    {
+      "Name": "RotorWinding-Leading",
+      "Region": "EW-NDE-Stator",
+      "Loss": 6000
+    },
+    {
+      "Name": "RotorWinding-Leading",
+      "Region": "EW-DE-Stator",
+      "Loss": 5000
+    },
+    {
+      "Name": "StatorWinding",
+      "Region": "Core",
+      "Loss": 2000
+    },
+    {
+      "Name": "StatorWinding",
+      "Region": "EW-NDE-Stator",
+      "Loss": 4000
+    },
+    {
+      "Name": "StatorWinding",
+      "Region": "EW-DE-Stator",
+      "Loss": 9000
+    },
+    {
+      "Name": "Tooth",
+      "Region": "Core",
+      "Loss": 7000
+    },
+    {
+      "Name": "BackIron",
+      "Region": "Core",
+      "Loss": 7000
+    }
+  ],
+  "Faces": [
+    {
+      "Name": "BarrelGap",
+      "Passage": "BarrelGap_Core",
+      "Calculation": "CFD"
+    },
+    {
+      "Name": "AirGapRotor",
+      "Passage": "AirGap-TopIP_Core",
+      "Calculation": "CFD"
+    },
+    {
+      "Name": "AirGapStator",
+      "Passage": "AirGap-TopIP_Core",
+      "Calculation": "CFD"
+    },
+    {
+      "Name": "TopIP",
+      "Passage": "AirGap-TopIP_Core",
+      "Calculation": "CFD"
+    },
+    {
+      "Name": "BtmIP",
+      "Passage": "BtmIP_Core",
+      "Calculation": "CFD"
+    },
+    {
+      "Name": "RotorFace",
+      "Passage": "None",
+      "Calculation": 50
+    },
+    {
+      "Name": "RotorSideEW",
+      "Passage": "None",
+      "Calculation": "EndRegion"
+    },
+    {
+      "Name": "RotorTopEW",
+      "Passage": "None",
+      "Calculation": "EndRegion"
+    },
+    {
+      "Name": "RotorGapEW",
+      "Passage": "None",
+      "Calculation": "EndRegion"
+    },
+    {
+      "Name": "Shaft",
+      "Passage": "None",
+      "Calculation": 50
+    },
+    {
+      "Name": "Housing",
+      "Passage": "None",
+      "Calculation": 20
+    },
+    {
+      "Name": "StatorWindingGapEW",
+      "Passage": "None",
+      "Calculation": "EndRegion"
+    },
+    {
+      "Name": "StatorOuterEW",
+      "Passage": "None",
+      "Calculation": "EndRegion"
+    },
+    {
+      "Name": "StatorInnerEW",
+      "Passage": "None",
+      "Calculation": "EndRegion"
+    }
+  ],
+  "Passages": [
+    {
+      "Passage": "OH_StatorFluid_EW-NDE-Stator",
+      "In_Passage": "Ambient",
+      "Out_Passage": "OH_RotorFluid_EW-NDE-Rotor,BarrelGap_Core",
+      "Flow_Rate": 3.53,
+      "Fluid": "Air"
+    },
+    {
+      "Passage": "OH_RotorFluid_EW-NDE-Rotor",
+      "In_Passage": "OH_StatorFluid_EW-NDE-Stator",
+      "Out_Passage": "AirGap-TopIP_Core,BtmIP_Core",
+      "Flow_Rate": 2.06,
+      "Fluid": "Air"
+    },
+    {
+      "Passage": "BarrelGap_Core",
+      "In_Passage": "OH_StatorFluid_EW-NDE-Stator",
+      "Out_Passage": "OH_StatorFluid_EW-DE-Stator",
+      "Flow_Rate": 1.47,
+      "Fluid": "Air"
+    },
+    {
+      "Passage": "AirGap-TopIP_Core",
+      "In_Passage": "OH_RotorFluid_EW-NDE-Rotor",
+      "Out_Passage": "OH_RotorFluid_EW-DE-Rotor",
+      "Flow_Rate": 1.65,
+      "Fluid": "Air"
+    },
+    {
+      "Passage": "BtmIP_Core",
+      "In_Passage": "OH_RotorFluid_EW-NDE-Rotor",
+      "Out_Passage": "OH_RotorFluid_EW-DE-Rotor",
+      "Flow_Rate": 0.41,
+      "Fluid": "Air"
+    },
+    {
+      "Passage": "OH_StatorFluid_EW-DE-Stator",
+      "In_Passage": "BarrelGap_Core",
+      "Out_Passage": "OH_RotorFluid_EW-DE-Rotor",
+      "Flow_Rate": 1.47,
+      "Fluid": "Air"
+    },
+    {
+      "Passage": "OH_RotorFluid_EW-DE-Rotor",
+      "In_Passage": "AirGap-TopIP_Core,BtmIP_Core,OH_StatorFluid_EW-DE-Stator",
+      "Out_Passage": "Ambient",
+      "Flow_Rate": 3.53,
+      "Fluid": "Air"
+    }
+  ],
+  "Fluids": [
+    {
+      "Name": "Air",
+      "Density": 1.225,
+      "Conductivity": 0.02
+    },
+    {
+      "Name": "Water",
+      "Density": 1000,
+      "Conductivity": 0.2
+    }
+  ]
+}
