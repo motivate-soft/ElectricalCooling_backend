@@ -25,6 +25,20 @@ SECRET_KEY = 'gx&!5!8yklb69t-jo)-xra@hf4(lmc@at@^&2_70t-m+g853!z'
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['localhost', '*', 'http://example.com']
+
+"""
+SETTING FOR CORS HEADER
+"""
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+# CORS_ORIGIN_WHITELIST = (
+#     'localhost:4200', 'http://example.com', '*'
+# )
+# CORS_ORIGIN_REGEX_WHITELIST = (
+#     'localhost:4200', 'http://example.com', '*'
+# )
 
 # Application definition
 
@@ -50,6 +64,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -176,11 +191,9 @@ SITE_ID = 1
 # ACCOUNT_AUTHENTICATION_METHOD = 'email'
 # ACCOUNT_UNIQUE_EMAIL = True
 
-# Cors header
-CORS_ORIGIN_ALLOW_ALL = True
-
+# Djoser setting
 DJOSER = {
-    'SEND_ACTIVATION_EMAIL': True,
+    'SEND_ACTIVATION_EMAIL': False,
     'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uid}/{token}',
     'ACTIVATION_URL': 'verify?uid={uid}&token={token}',
     'SOCIAL_AUTH_ALLOWED_REDIRECT_URIS': ['http://test.localhost/']

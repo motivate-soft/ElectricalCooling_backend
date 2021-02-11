@@ -1,10 +1,12 @@
 from django.contrib.auth import get_user_model
+from django.utils import timezone
 from rest_framework import permissions, status, exceptions
 from rest_framework.views import APIView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer, TokenRefreshSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework.response import Response
+from django.conf import settings
 
 User = get_user_model()
 
@@ -17,6 +19,16 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 
     def update(self, instance, validated_data):
         pass
+
+    def validate(self, attrs):
+        data = super().validate(attrs)
+
+        refresh = self.get_token(self.user)
+
+        data['refresh'] = str(refresh)
+        data['token'] = str(refresh.access_token)
+        del data['access']
+        return data
 
     @classmethod
     def get_token(cls, user):

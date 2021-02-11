@@ -52,6 +52,9 @@ class CustomUserManager(BaseUserManager):
 #     USERNAME_FIELD = "email"
 
 class CustomUser(AbstractUser):
+    class Meta:
+        db_table = 'auth_user'
+
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=400)
     username = None
@@ -61,9 +64,6 @@ class CustomUser(AbstractUser):
     REQUIRED_FIELDS = []
 
     objects = CustomUserManager()
-
-    class Meta:
-        db_table = 'auth_user'
 
     def __str__(self):
         return self.email
