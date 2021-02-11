@@ -15,3 +15,6 @@ media
 
 # Editor
 .idea
+
+# Credentials
+.env
