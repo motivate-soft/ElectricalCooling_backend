@@ -1,6 +1,6 @@
 from django.urls import path
 from rest_framework.urlpatterns import format_suffix_patterns
-from heat import views
+from cooling import views
 
 urlpatterns = format_suffix_patterns([
     path('', views.api_root),

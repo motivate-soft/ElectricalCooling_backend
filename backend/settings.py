@@ -59,7 +59,7 @@ INSTALLED_APPS = [
 
     # Local Apps (Your project's apps)
     'accounts.apps.AccountsConfig',
-    # 'heat.apps.HeatConfig'
+    'cooling.apps.CoolingConfig'
 ]
 
 MIDDLEWARE = [

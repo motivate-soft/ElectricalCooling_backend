@@ -1,11 +1,12 @@
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
 from django.db.models import JSONField
-
 from accounts.models import CustomUser
 
 
 class Cooling(models.Model):
+    class Meta:
+        db_table = 'cooling_model'
     components = ArrayField(JSONField(null=True, blank=True), blank=True, null=True)
     losses = ArrayField(JSONField(null=True, blank=True), blank=True, null=True)
     faces = ArrayField(JSONField(null=True, blank=True), blank=True, null=True)

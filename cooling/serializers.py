@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from heat.models import Cooling
+from cooling.models import Cooling
 
 
 class CoolingSerializer(serializers.ModelSerializer):

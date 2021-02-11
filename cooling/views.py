@@ -6,8 +6,8 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 
-from heat.models import Cooling
-from heat.serializers import CoolingSerializer
+from cooling.models import Cooling
+from cooling.serializers import CoolingSerializer
 
 
 # API endpoints
