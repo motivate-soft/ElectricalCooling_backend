@@ -8,11 +8,13 @@ Django/Django Rest Framework
 
 ## Running project
 ### create .env file on root dir
+```
 SECRET_KEY=DJANGO_APP_SECRET_KEY
 DB_HOST=DATABASE_HOSTNAME
 DB_NAME=DATABASE_NAME
 DB_USER=DATABASE_USERNAME
 DB_PASSWORD=USER_PASSWORD
+```
 
 ### virtualenv, dependencies, migrate
 You have to install python 3.8+ to run this app
