@@ -7,6 +7,8 @@ from accounts.models import CustomUser
 class Cooling(models.Model):
     class Meta:
         db_table = 'cooling_model'
+
+    name = models.CharField(max_length=200)
     components = ArrayField(JSONField(null=True, blank=True), blank=True, null=True)
     losses = ArrayField(JSONField(null=True, blank=True), blank=True, null=True)
     faces = ArrayField(JSONField(null=True, blank=True), blank=True, null=True)

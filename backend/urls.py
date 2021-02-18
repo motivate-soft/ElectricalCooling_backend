@@ -21,5 +21,5 @@ import accounts
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('accounts.urls')),
-    path('api/cooling/', include('cooling.urls')),
+    path('api/', include('cooling.urls')),
 ]
