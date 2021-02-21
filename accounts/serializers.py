@@ -1,6 +1,9 @@
 from djoser.conf import settings
 from django.contrib.auth import get_user_model
 from djoser.serializers import UserCreateSerializer as BaseUserRegistrationSerializer
+import django.contrib.auth.password_validation as validators
+from django.core import exceptions
+from rest_framework import serializers
 
 User = get_user_model()
 

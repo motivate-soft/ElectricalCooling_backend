@@ -1,13 +1,29 @@
-from django.shortcuts import render
-
-# Create your views here.
-from rest_framework import mixins, generics
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from rest_framework.reverse import reverse
+from rest_framework import mixins, generics, permissions, authentication
+from rest_framework.permissions import BasePermission
 
 from cooling.models import Cooling
 from cooling.serializers import CoolingSerializer
+
+
+class IsAdminUser(BasePermission):
+    """
+    Allows access only to admin users.
+    """
+
+    def has_permission(self, request, view):
+        return request.user and request.user.is_staff
+
+
+class AdminAuthenticationPermission(permissions.BasePermission):
+    ADMIN_ONLY_AUTH_CLASSES = [authentication.BasicAuthentication,
+                               authentication.SessionAuthentication]
+
+    def has_permission(self, request, view):
+        user = request.user
+        if user and user.is_authenticated():
+            return user.is_superuser or not any(
+                isinstance(request._authenticator, x) for x in self.ADMIN_ONLY_AUTH_CLASSES)
+        return False
 
 
 class CoolingListView(mixins.ListModelMixin,
@@ -17,6 +33,7 @@ class CoolingListView(mixins.ListModelMixin,
     List View
 
     """
+    permission_classes = (IsAdminUser,)
     queryset = Cooling.objects.all()
     serializer_class = CoolingSerializer
 
@@ -24,6 +41,30 @@ class CoolingListView(mixins.ListModelMixin,
         return self.list(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
+        request.data['owner'] = request.user.id
+        return self.create(request, *args, **kwargs)
+
+
+class MyCoolingListView(mixins.ListModelMixin,
+                        mixins.CreateModelMixin,
+                        generics.GenericAPIView):
+    """
+    List View
+
+    """
+    queryset = Cooling.objects.filter()
+    serializer_class = CoolingSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        queryset = Cooling.objects.filter(owner=user)
+        return queryset
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        request.data['owner'] = request.user.id
         return self.create(request, *args, **kwargs)
 
 
