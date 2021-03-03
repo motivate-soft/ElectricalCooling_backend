@@ -5,7 +5,7 @@ from accounts.views.custom_token_view import CustomTokenObtainPairView, LogoutAn
 
 urlpatterns = [
     re_path(r"^auth/", include("djoser.urls.base")),
-    re_path(r"^auth/", include("djoser.urls.authtoken")),
+    # re_path(r"^auth/", include("djoser.urls.authtoken")),
     # re_path(r"^auth/", include("djoser.urls.jwt")),
     re_path(r"^auth/jwt/create/?", CustomTokenObtainPairView.as_view(), name="jwt-create"),
     re_path(r"^auth/jwt/refresh/?", views.TokenRefreshView.as_view(), name="jwt-refresh"),

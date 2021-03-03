@@ -10,7 +10,7 @@ urlpatterns = [
          name='cooling-detail'),
     path('cooling/me',
          views.MyCoolingListView.as_view(),
-         name='cooling-list'),
+         name='mycooling-list'),
     path('cooling/me/<int:pk>',
          views.CoolingDetailView.as_view(),
          name='cooling-detail'),

@@ -180,10 +180,22 @@ SITE_ID = 1
 # Djoser setting
 DJOSER = {
     'SEND_ACTIVATION_EMAIL': False,
-    'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uid}/{token}',
+    # 'SEND_CONFIRMATION_EMAIL': False,
+    # 'SET_PASSWORD_RETYPE': False,
+    # 'SET_USERNAME_RETYPE': False,
+    # 'PASSWORD_RESET_CONFIRM_RETYPE': False,
+    # 'PASSWORD_RESET_SHOW_EMAIL_NOT_FOUND': False,
+    'PASSWORD_RESET_CONFIRM_URL': 'auth/reset-password?token={token}',
     'ACTIVATION_URL': 'verify?uid={uid}&token={token}',
     'SOCIAL_AUTH_ALLOWED_REDIRECT_URIS': ['http://test.localhost/'],
     'SERIALIZERS': {
-        'user_create': 'accounts.serializers.UserRegistrationSerializer'
-    }
+        'user_create': 'accounts.serializers.UserRegistrationSerializer',
+        'current_user': 'accounts.serializers.UserSerializer',
+        "password_reset_confirm": "accounts.serializers.UserPasswordResetConfirmSerializer",
+    },
+    "EMAIL": (
+        {
+            "password_reset": "accounts.views.custom_password_reset_email.CustomPasswordResetEmail"
+        }
+    ),
 }
