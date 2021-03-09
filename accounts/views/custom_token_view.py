@@ -23,15 +23,15 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super().validate(attrs)
 
-        # refresh = self.get_token(self.user)
-        # token = {
-        #     'refresh_token': data['refresh'],
-        #     'access_token': str(refresh.access_token)
-        # }
-        # data['token'] = token
-        # 
-        # del data['access']
-        # del data['refresh']
+        refresh = self.get_token(self.user)
+        token = {
+            'refresh_token': data['refresh'],
+            'access_token': str(refresh.access_token)
+        }
+        data['token'] = token
+
+        del data['access']
+        del data['refresh']
 
         return data
 

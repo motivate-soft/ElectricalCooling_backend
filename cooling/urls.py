@@ -14,4 +14,6 @@ urlpatterns = [
     path('cooling/me/<int:pk>',
          views.CoolingDetailView.as_view(),
          name='cooling-detail'),
+    path('cooling/solve',
+         views.solve_thermal_model)
 ]
