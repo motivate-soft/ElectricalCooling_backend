@@ -1,9 +1,12 @@
-import jsonpickle
+import json
+import os
+
 from rest_framework import mixins, generics, permissions, authentication
 from rest_framework.decorators import api_view
 from rest_framework.permissions import BasePermission
 from rest_framework.response import Response
 
+from backend.settings import BASE_DIR
 from cooling.models import Cooling
 from cooling.serializers import CoolingSerializer
 
@@ -13651,3 +13654,10 @@ def solve_thermal_model(json_input):
         "winding_temperatures": winding_temperatures
     }
     return Response(res_dic)
+
+
+@api_view(['GET'])
+def get_demo_model(request):
+    json_data = open(os.path.join(BASE_DIR, 'model.json'))
+    model_json = json.load(json_data)
+    return Response(model_json)
